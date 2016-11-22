@@ -1,0 +1,19 @@
+<RCC>
+    <qresource prefix="/">
+        <file>Active_page_bar.qml</file>
+        <file>Bookmark_icon.qml</file>
+        <file>Davinci_bookmark.qml</file>
+        <file>Davinci_control_center.qml</file>
+        <file>Davinci_delete_btn.qml</file>
+        <file>Davinci_Icon.qml</file>
+        <file>Davinci_screen.qml</file>
+        <file>Main_screen.qml</file>
+        <file>Setting_screen.qml</file>
+        <file>res/Arial_Black.ttf</file>
+        <file>res/background.png</file>
+        <file>res/hide_set.png</file>
+        <file>res/show_set.png</file>
+        <file>Bookmark_del_icon.qml</file>
+        <file>Davinci_bookmark_delete.qml</file>
+    </qresource>
+</RCC>
