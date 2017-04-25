@@ -1,6 +1,6 @@
 TEMPLATE = app
 
-QT += qml quick widgets
+QT += qml quick widgets serialport
 
 CONFIG += c++11
 
@@ -17,9 +17,6 @@ RESOURCES += qml.qrc
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
 
-# Default rules for deployment.
-include(src/qextserialport.pri)
-include(deployment.pri)
 
 HEADERS += \
     app_manager.h \

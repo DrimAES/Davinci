@@ -15,14 +15,14 @@ void Comunication_manager::init_serial_port(QString port_name)
      * Data bit     : 8Bit
      * Stop bit     : 1bit
     */
-    serial_port = new QextSerialPort(QLatin1String("/dev/ttymxc2"), QextSerialPort::EventDriven);
-    serial_port->setBaudRate(BAUD9600);
-    serial_port->setFlowControl(FLOW_OFF);
-    serial_port->setParity(PAR_NONE);
-    serial_port->setDataBits(DATA_8);
-    serial_port->setStopBits(STOP_1);
+    serial_port = new QSerialPort(QLatin1String("/dev/ttymxc2"));
+    serial_port->setBaudRate(QSerialPort::Baud9600);
+    serial_port->setFlowControl(QSerialPort::NoFlowControl);
+    serial_port->setParity(QSerialPort::NoParity);
+    serial_port->setDataBits(QSerialPort::Data8);
+    serial_port->setStopBits(QSerialPort::OneStop);
     //set timeouts to 500 ms
-    serial_port->setTimeout(10);
+    //serial_port->setTimeout(10);
 
     /* Try to open Serial port */
 }

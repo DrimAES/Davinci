@@ -3,7 +3,7 @@
 
 #include <QObject>
 #include <QDebug>
-#include "src/qextserialport.h"
+#include <QtSerialPort/QSerialPort>
 #include "backlight_manager.h"
 
 #define ON_AUTO_BRIGHTNESS true
@@ -28,7 +28,8 @@ signals:
 
 
 private:
-     QextSerialPort *serial_port;
+    QSerialPort *serial_port;
+
 
 public slots:
     void slotGetData();

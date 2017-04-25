@@ -13,25 +13,12 @@ Backlight_manager::Backlight_manager(QObject *parent) : QObject(parent)
 
 void Backlight_manager::init_backlight_port()
 {
-    /*
-     * # Set serial port for backlight #
-     * Port name    : /sys/class/backlight/backlight.17/brightness
-     * BaudRate     : 9600
-     * ParityType   : None
-     * Data bit     : 8Bit
-     * Stop bit     : 1bit
-    */
-    backlight_port = new QextSerialPort(QLatin1String("/sys/class/backlight/backlight/brightness"), QextSerialPort::EventDriven);
-    backlight_port->setBaudRate(BAUD9600);
-    backlight_port->setFlowControl(FLOW_OFF);
-    backlight_port->setParity(PAR_NONE);
-    backlight_port->setDataBits(DATA_8);
-    backlight_port->setStopBits(STOP_1);
-    //set timeouts to 500 ms
-    backlight_port->setTimeout(10);
 
+    backlight_port = new QFile();
+    backlight_port->setFileName("/sys/class/backlight/backlight/brightness");
 
-    if(!backlight_port->open(QIODevice::ReadWrite | QIODevice::Truncate))
+    if(!backlight_port->open(QIODevice::WriteOnly | QIODevice::Text
+                   | QIODevice::Truncate))
     {
         qDebug()<<"Fail to open backlight port";
     }
@@ -45,5 +32,6 @@ void Backlight_manager::change_backlight(int val)
     QString backlight_val_str = tmp.setNum(backlight_value);
     QByteArray backlight  = backlight_val_str.toLocal8Bit();
 
-    backlight_port->write(backlight.data());
+    QTextStream out(backlight_port);
+    out << backlight.data();
 }
