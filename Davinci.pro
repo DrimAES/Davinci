@@ -10,7 +10,8 @@ SOURCES += main.cpp \
     comunication_manager.cpp \
     control_cen_manager.cpp \
     setting_manager.cpp \
-    time_manager.cpp
+    time_manager.cpp \
+    qtsocketcan.cpp
 
 RESOURCES += qml.qrc
 
@@ -24,6 +25,7 @@ HEADERS += \
     comunication_manager.h \
     control_cen_manager.h \
     setting_manager.h \
-    time_manager.h
+    time_manager.h \
+    qtsocketcan.h
 
 DISTFILES +=

@@ -110,10 +110,10 @@ Rectangle {
             activeFocusOnPress: false
             anchors.horizontalCenter: parent.horizontalCenter
 
-            maximumValue: 70
+            maximumValue: 110
             minimumValue: 10
 
-            value: 70
+            value: 110
             onValueChanged: { back_manager.change_backlight(value/10) }
         }
     }

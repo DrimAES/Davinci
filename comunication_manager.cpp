@@ -2,76 +2,59 @@
 
 Comunication_manager::Comunication_manager(QObject *parent) : QObject(parent)
 {
-    init_serial_port("/dev/ttymxc2");
-}
-
-void Comunication_manager::init_serial_port(QString port_name)
-{
-    /*
-     * # Set serial port for i.MX6 #
-     * Port name    : /dev/ttymxc2
-     * BaudRate     : 9600
-     * ParityType   : None
-     * Data bit     : 8Bit
-     * Stop bit     : 1bit
-    */
-    serial_port = new QSerialPort(QLatin1String("/dev/ttymxc2"));
-    serial_port->setBaudRate(QSerialPort::Baud9600);
-    serial_port->setFlowControl(QSerialPort::NoFlowControl);
-    serial_port->setParity(QSerialPort::NoParity);
-    serial_port->setDataBits(QSerialPort::Data8);
-    serial_port->setStopBits(QSerialPort::OneStop);
-    //set timeouts to 500 ms
-    //serial_port->setTimeout(10);
-
-    /* Try to open Serial port */
+    //init_serial_port("/dev/ttymxc2");
+    init_socketcan();
 }
 
 void Comunication_manager::set_auto_brightness(bool flag)
 {
     if(flag == ON_AUTO_BRIGHTNESS)
     {
-        /* If fail to open serial port */
-        if(!serial_port->open(QIODevice::ReadWrite))
-        {
-            qDebug()<<"Fail to open port";
-        }
-
-        qDebug()<<"Start auto brightness";
-        connect(serial_port,SIGNAL(readyRead()),this,SLOT(slotGetData()));
+        qDebug()<<"[Comunication_manager] Start auto brightness";
+        connect(notifier, SIGNAL(activated(int)), qsock_can, SLOT(slot_read_socketcan(int)));
     }
 
     else
     {
-        qDebug()<<"Stop auto brightness";
-        disconnect(serial_port,SIGNAL(readyRead()),this,SLOT(slotGetData()));
-
-        serial_port->close();
+        qDebug()<<"[Comunication_manager] Stop auto brightness";
+        disconnect(notifier, SIGNAL(activated(int)), qsock_can, SLOT(slot_read_socketcan(int)));
     }
 }
 
-void Comunication_manager::slotGetData()
+void Comunication_manager::init_socketcan()
 {
-    QByteArray data = serial_port->readAll();
-    QString volt_str(data);
+    qsock_can = new QtSocketCan();
+    int sock_can = qsock_can->connect_cansocket(BACKEND_NAME);
 
-
-    float volt_num;
-    int raw_num;
-    unsigned char lcd_britness;
-
-    /* Paring number part */
-    /* Data type example : ADC Result: 1.2744 V -> Parsing 1.2744 */
-    volt_str = volt_str.mid(12,6);
-
-    /* string to float */
-    volt_num = volt_str.toFloat();
-
-    /* voltage to raw data */
-    raw_num = (volt_num *1024)/5;
-
-    lcd_britness = (unsigned char)(raw_num/145);
-    lcd_britness = 8 - lcd_britness;
-
-    backlight_manger.change_backlight((int)lcd_britness);
+    notifier = new QSocketNotifier(sock_can, QSocketNotifier::Read, this);
+    connect(qsock_can, SIGNAL(sig_send_can_data(can_frame, int)), this, SLOT(slot_get_can_data(can_frame, int)));
 }
+
+
+void Comunication_manager::slot_get_can_data(struct can_frame frame_rd, int recv_byte)
+{
+    // frame[0] ~ frame[3] : can high_data [ ex.0xABCD -> 0xA:frame[0], 0xD:frame[3]
+    // frame[4] ~ frame[7] : can low_data
+
+    uint light_data = frame_rd.data[LIGHT_D_H_IDX] << 8 | frame_rd.data[LIGHT_D_L_IDX];
+
+    int backlight_val = light_data / (MAX_LIGHT_DATA/MAX_BRIGHTNESS);
+    static int tmp_backlight = 0;
+
+    /*
+    if(backlight_val > MAX_BRIGHTNESS) backlight_val = MAX_BRIGHTNESS;
+    else if(backlight_val < LOW_BRIGHTNESS) backlight_val = LOW_BRIGHTNESS;
+
+    if( tmp_backlight != 0 )
+    {
+        if((abs((backlight_val-tmp_backlight))<2))
+            backlight_val = tmp_backlight;
+
+    }
+
+    tmp_backlight = backlight_val;
+    */
+
+    backlight_manger.change_backlight(backlight_val);
+}
+
