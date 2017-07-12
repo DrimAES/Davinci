@@ -9,8 +9,11 @@ Window {
     signal set_bookmark(var app_name)
     signal del_bookmark(int del_bookmark_index)
     signal load_bookmark()
+    signal background_set(var i)
 
     property int isbookmarked
+
+    property var is_set_back_res:0
 
 
     function refresh_all_screen() {
@@ -57,7 +60,7 @@ Window {
         bookmark.visible = true
         list_screen.visible = false
         active_bar.visible = false
-    //load_bookmark()
+        //load_bookmark()
     }
 
     id: root
@@ -65,10 +68,9 @@ Window {
     width: Screen.width
     height: Screen.height
     visible: true
-    visibility: Window.FullScreen
+
 
     FontLoader {
-
         id: font_load
         source: "res/Arial_Black.ttf"
     }
@@ -258,7 +260,15 @@ Window {
 
         MouseArea {
             anchors.fill: setting_screen_btn
-            onClicked: { show_setting_page() }
+            onClicked: {
+                console.log("set back")
+                if(is_set_back_res==0)
+                {
+                    background_set(1)
+                    is_set_back_res=1
+                }
+                show_setting_page()
+            }
         }
     }
 
@@ -280,7 +290,7 @@ Window {
     Setting_screen{
 
         id: setting_screen_page
-        y:topbar.height
+        //y:topbar.height
     }
 }
 

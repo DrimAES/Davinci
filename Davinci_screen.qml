@@ -32,14 +32,14 @@ Item {
     height: parent.height
 
     Rectangle {
-
-        width: root.width * 0.9
-        height: root.width * 0.6
+        id:screen_sub_img
+        width: screen.width * 0.9
+        height: screen.height * 0.8
         anchors.centerIn: parent
-        color: "white"
+        color: "#3fffffff"
         radius: 5
-        opacity: 0.1
     }
+
 
     MouseArea {
 
@@ -48,14 +48,24 @@ Item {
     }
 
     Grid {
+        id:screen_grid
+        width:screen_sub_img.width * 0.8
+        height: screen_sub_img.height * 0.9
+        x:180
+        y:120
         rows:2
         columns: 4
         spacing: (parent.width) * 0.1
-        anchors.centerIn: parent
+
+
 
         Repeater {
 
             id : icon_repeter
+            width:screen_sub_img.width * 0.7
+            height: screen_sub_img.height * 0.8
+
+
             /* have to get item count fromm c++ class */
             model: app_manager.get_app_cnt(screen_id)
 
@@ -69,5 +79,7 @@ Item {
             }
         }
     }
+
+
 }
 

@@ -12,7 +12,7 @@ Item {
         if(isSet[bookmark_id] === 0)
         {
             bookmark.visible = false
-                        bookmark_delete_page.visible = false
+            bookmark_delete_page.visible = false
             list_screen.visible = true
             active_bar.visible = true
 

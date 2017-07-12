@@ -84,12 +84,14 @@ QString App_manager::get_res_file(QString name)
     dir.setSorting(QDir::Size | QDir::Reversed);
 
     QFileInfoList res_list = dir.entryInfoList();
+
     for( int i=0 ; i<res_list.size() ; i++ )
     {
         QFileInfo info = res_list.at(i);
             if(app_name == info.fileName())
             {
                 QString res_dir = "file://opt/res/"+name+".png";
+
                 return res_dir;
             }
     }
@@ -99,8 +101,9 @@ QString App_manager::get_res_file(QString name)
 
 void App_manager::delete_app(QString name)
 {
-    QString program = "rm " + name;
+    QString program = "rm /opt/" + name;
     QByteArray prog_name = program.toLocal8Bit();
+
 
     system(prog_name.data());
 }

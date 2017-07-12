@@ -12,12 +12,6 @@
 #define ON_AUTO_BRIGHTNESS true
 #define OFF_AUTO_BRIGHTNESS false
 
-#define LIGHT_D_H_IDX 6
-#define LIGHT_D_L_IDX 7
-
-#define SPEED_D_H_IDX 4
-#define SPEED_D_L_IDX 5
-
 #define MAX_LIGHT_DATA 5000
 #define MAX_BRIGHTNESS 11
 #define LOW_BRIGHTNESS 1

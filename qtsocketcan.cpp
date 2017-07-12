@@ -72,3 +72,8 @@ void QtSocketCan::slot_read_socketcan(int can_sock)
 
 }
 
+void QtSocketCan::disconnect_cansocket(int can_socket)
+{
+    close(can_socket);
+}
+
