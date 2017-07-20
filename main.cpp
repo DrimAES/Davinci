@@ -1,8 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlEngine>
-#include<QQmlContext>
-
+#include <QQmlContext>
 
 #include <QObject>
 #include "app_manager.h"
@@ -20,8 +19,6 @@ int main(int argc, char *argv[])
     QScopedPointer<Setting_manager> set_manager(new Setting_manager);
     QScopedPointer<Backlight_manager> back_manager(new Backlight_manager);
     QScopedPointer<Control_cen_manager> con_cen_manager(new Control_cen_manager);
-
-
 
 
     QQmlApplicationEngine engine;

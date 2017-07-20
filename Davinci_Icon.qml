@@ -10,6 +10,7 @@ Item {
 
     signal add_bookmark(var app_name)
     signal delete_icon()
+    signal start_app()
 
 
     function cancel_delete(){
@@ -55,6 +56,8 @@ Item {
                 isclicked = true
                 /* bookmark mode */
                 console.log(icon_name)
+                check_is_running.running = true;
+                list_screen.visible = false
                 app_manager.start_app(icon_name)
             }
         }
@@ -93,8 +96,8 @@ Item {
         Image{
 
             id: app_icon
-            width: main_icon.width
-            height: main_icon.width
+            width: 100
+            height: 100
             source: app_manager.get_res_file(icon_name)
 
             MouseArea {

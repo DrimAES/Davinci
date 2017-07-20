@@ -3,10 +3,10 @@
 
 #include <QObject>
 #include <QDebug>
-#include <QtSerialPort/QSerialPort>
 #include <QtCore/qsocketnotifier.h>
 #include "backlight_manager.h"
 #include "qtsocketcan.h"
+#include <QTimer>
 #include <linux/can.h>
 
 #define ON_AUTO_BRIGHTNESS true
@@ -24,7 +24,6 @@ class Comunication_manager : public QObject
 public:
     explicit Comunication_manager(QObject *parent = 0);
     Q_INVOKABLE void set_auto_brightness(bool flag);
-
     bool auto_brightness_flag;
 
     Backlight_manager backlight_manger;
@@ -36,7 +35,6 @@ signals:
 
 private:
     void init_socketcan();
-
 
 public slots:
     void slot_get_can_data(struct can_frame frame_rd, int recv_byte);

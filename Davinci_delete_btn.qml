@@ -21,7 +21,7 @@ Item {
             id: delete_app
             width: root.width * 0.04
             height: root.width * 0.04
-            source: "file://opt/res/delete_app.png"
+            source: "qrc:/res/btn_delete.png"
 
             MouseArea {
 

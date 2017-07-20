@@ -4,6 +4,8 @@
 App_manager::App_manager(QObject *parent) : QObject(parent)
 {
     get_app_list();
+
+    //connect(this,SIGNAL(finished_app()),m_parent, SLOT(active_app()));
 }
 
 void App_manager::get_app_list()
@@ -42,12 +44,14 @@ void App_manager::get_app_list()
 
 void App_manager::start_app(QString app_name)
 {
-
+     is_running = 1;
      /* For eglfs */
      QString program = "/opt/" + app_name + " -platform eglfs";
      QByteArray prog_name = program.toLocal8Bit();
 
      system(prog_name.data());
+
+     is_running = 0;
 
 
      /* For wayland */
@@ -96,7 +100,7 @@ QString App_manager::get_res_file(QString name)
             }
     }
 
-    return "file://opt/res/no_image.png";
+    return "file://opt/res/undefined.png";
 }
 
 void App_manager::delete_app(QString name)
@@ -112,6 +116,12 @@ void App_manager::refresh_dir()
 {
     get_app_list();
 }
+
+int App_manager::check_is_running()
+{
+    return is_running;
+}
+
 
 void App_manager::init_list()
 {

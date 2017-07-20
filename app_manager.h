@@ -28,6 +28,7 @@ public:
     QFileInfoList excuteable_app_list;
     app_list_info list[5];
     int screen_cnt=0;
+    int is_running=0;
 
     Q_INVOKABLE void get_app_list();
     Q_INVOKABLE void start_app(QString app_name);
@@ -37,10 +38,14 @@ public:
     Q_INVOKABLE QString get_res_file(QString name);
     Q_INVOKABLE void delete_app(QString name);
     Q_INVOKABLE void refresh_dir();
+    Q_INVOKABLE int check_is_running();
+
 
     void init_list();
 
+
 signals:
+    void finished_app();
 
 public slots:
 };

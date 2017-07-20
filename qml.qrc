@@ -15,5 +15,51 @@
         <file>res/show_set.png</file>
         <file>Bookmark_del_icon.qml</file>
         <file>Davinci_bookmark_delete.qml</file>
+        <file>res/youtube.png</file>
+        <file>res/weather.png</file>
+        <file>res/video.png</file>
+        <file>res/undefined.png</file>
+        <file>res/sync.png</file>
+        <file>res/setting_btn.png</file>
+        <file>res/set_bookmark.png</file>
+        <file>res/set_back.png</file>
+        <file>res/SerialTest.png</file>
+        <file>res/seekbar_handle.png</file>
+        <file>res/please.png</file>
+        <file>res/page_indicator_normal.png</file>
+        <file>res/page_indicator_activated.png</file>
+        <file>res/note.png</file>
+        <file>res/no_image.png</file>
+        <file>res/New_app.png</file>
+        <file>res/musicplayer.png</file>
+        <file>res/map.png</file>
+        <file>res/invisible.png</file>
+        <file>res/info_on.png</file>
+        <file>res/info_off.png</file>
+        <file>res/ic_trash.png</file>
+        <file>res/ic_settings.png</file>
+        <file>res/ic_home.png</file>
+        <file>res/ic_brightness.png</file>
+        <file>res/ic_brightness_auto.png</file>
+        <file>res/ic_bookmark.png</file>
+        <file>res/ic_bookmark_add.png</file>
+        <file>res/home.png</file>
+        <file>res/go_sun.png</file>
+        <file>res/frame_back.png</file>
+        <file>res/down_sun.png</file>
+        <file>res/delete1.jpeg</file>
+        <file>res/delete.jpeg</file>
+        <file>res/delete_app.png</file>
+        <file>res/CSD_Sensing.png</file>
+        <file>res/control_handle.png</file>
+        <file>res/btn_delete.png</file>
+        <file>res/bg_wallpaper.png</file>
+        <file>res/bg_control.png</file>
+        <file>res/bg_control_bar_bg.png</file>
+        <file>res/bg_btn_normal.png</file>
+        <file>res/bg_bookmark.png</file>
+        <file>res/auto_britness_on.png</file>
+        <file>res/auto_britness_off.png</file>
+        <file>res/add_bookmark.png</file>
     </qresource>
 </RCC>

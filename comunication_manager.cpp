@@ -2,7 +2,6 @@
 
 Comunication_manager::Comunication_manager(QObject *parent) : QObject(parent)
 {
-    //init_serial_port("/dev/ttymxc2");
     init_socketcan();
 }
 
@@ -47,4 +46,8 @@ void Comunication_manager::slot_get_can_data(struct can_frame frame_rd, int recv
         backlight_manger.change_backlight(backlight_val);
     }
 }
+
+
+
+
 

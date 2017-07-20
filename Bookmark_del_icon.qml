@@ -7,8 +7,8 @@ Item {
     property var del_icon_image
 
     id: bookmark_del_icon
-    width: bookmark_delete_page.width * 0.13
-    height: bookmark_del_icon.width + 30
+    width: 45
+    height: 46
 
     Column {
 

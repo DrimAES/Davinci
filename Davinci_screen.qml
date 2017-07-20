@@ -36,7 +36,7 @@ Item {
         width: screen.width * 0.9
         height: screen.height * 0.8
         anchors.centerIn: parent
-        color: "#3fffffff"
+        color: "#00ffffff"
         radius: 5
     }
 
@@ -51,11 +51,11 @@ Item {
         id:screen_grid
         width:screen_sub_img.width * 0.8
         height: screen_sub_img.height * 0.9
-        x:180
-        y:120
+        x:220
+        y:145
         rows:2
         columns: 4
-        spacing: (parent.width) * 0.1
+        spacing: (parent.width) * 0.065
 
 
 

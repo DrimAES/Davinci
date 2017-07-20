@@ -17,7 +17,7 @@ Item {
     Row {
 
         anchors.horizontalCenter: active_page.horizontalCenter
-        spacing: root.width * 0.003
+        spacing: root.width * 0.01
 
         Repeater {
 
@@ -26,8 +26,9 @@ Item {
             delegate: Rectangle{
 
                 id: current_bar
-                width: root.width * 0.02
-                height: root.width * 0.007
+                width: root.width * 0.012
+                height: root.width * 0.012
+                radius: 100
                 color: if(index == 0) "white" ; else "gray"
             }
         }

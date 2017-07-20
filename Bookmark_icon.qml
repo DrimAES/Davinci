@@ -3,7 +3,7 @@ import QtQuick.Controls 1.4
 
 Item {
     property string bookmark_icon_name:"Add Icon"
-    property string icon_image:"file://opt/res/add_bookmark.png"
+    property string icon_image:"qrc:/res/ic_bookmark_add.png"
     property int    bookmark_id
 
     function click_bookmarked_app() {
@@ -30,11 +30,20 @@ Item {
     }
 
     id: bookmark_icon
-    width: bookmark_page.width * 0.13
+    //width: bookmark_page.width * 0.13
+    //height: bookmark_icon.width + 30
+    width: root.width * 0.11
     height: bookmark_icon.width + 30
+
+
+    FontLoader {
+        id: font_load
+        source: "res/Arial_Black.ttf"
+    }
 
     Column {
 
+        spacing: 15
         Image {
 
             id: bookmark_btn
@@ -54,9 +63,10 @@ Item {
             width: bookmark_icon.width
             text: bookmark_icon_name
             anchors.horizontalCenter: parent.horizontalCenter
+            font.family: font_load.name
             horizontalAlignment: Text.AlignHCenter
-            font.pointSize: root.width * 0.015
-            color: "black"
+            font.pointSize: root.width * 0.012
+            color: "white"
         }
     }
 

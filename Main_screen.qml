@@ -69,7 +69,6 @@ Window {
     height: Screen.height
     visible: true
 
-
     FontLoader {
         id: font_load
         source: "res/Arial_Black.ttf"
@@ -88,7 +87,7 @@ Window {
         id: topbar
         width: root.width
         height: root.width*0.05
-        color: "#3d3d3d"
+        color: "#6f000000"
 
         Timer {
 
@@ -186,7 +185,7 @@ Window {
     Active_page_bar{
 
         id: active_bar
-        y:show_control_btn.y-(root.height/7)
+        y:520
         x:root.width/2-active_bar.width/2
     }
 
@@ -206,38 +205,12 @@ Window {
     Davinci_control_center{
 
         x:(root.width/2)-(control_center.width)/2
-        y:root.height+control_center.height
+        y:root.height-40
         id: control_center
-        visible: false
+        visible: true
         is_show: 0
     }
 
-    PropertyAnimation {
-
-        id: show_control_center_animation;
-        target: control_center;
-        to: root.height-control_center.height
-        easing.type: Easing.InOutElastic;
-        easing.amplitude: 2.0
-        easing.period: 1.5
-        property: "y"
-        duration: 1000
-    }
-
-    Image{
-
-        id: show_control_btn
-        y: root.height - show_control_btn.height
-        width: root.width * 0.08
-        height: root.width * 0.02
-        source: "res/show_set.png"
-        anchors.horizontalCenter: parent.horizontalCenter
-
-        MouseArea {
-            anchors.fill: show_control_btn
-            onClicked: { show_control_center() }
-        }
-    }
 
     NumberAnimation {
 
@@ -251,15 +224,23 @@ Window {
 
     Image {
 
-        id: setting_screen_btn
-        width: root.width * 0.05
-        height: root.width * 0.05
-        y:root.height-setting_screen_btn.height
-        //source: "file:./res/setting_btn.png"
-        source: "file://opt/res/setting_btn.png"
+        id: setting_screen_btn_bg
+        width: 64
+        height: 64
+        x:20
+        y:root.height-setting_screen_btn_bg.height-15
+        source: "qrc:/res/bg_btn_normal.png"
+
+        Image {
+            id:setting_screen_btn
+            width: 31
+            height: 31
+            source: "qrc:/res/ic_settings.png"
+            anchors.centerIn: setting_screen_btn_bg
+        }
 
         MouseArea {
-            anchors.fill: setting_screen_btn
+            anchors.fill: setting_screen_btn_bg
             onClicked: {
                 console.log("set back")
                 if(is_set_back_res==0)
@@ -274,15 +255,22 @@ Window {
 
     Image {
 
-        id: bookmark_btn
-        width: root.width * 0.05
-        height: root.width * 0.05
-        x:setting_screen_btn.x + setting_screen_btn.width
-        y:root.height-bookmark_btn.height
-        source: "file://opt/res/set_bookmark.png"
+        id: bookmark_btn_bg
+        width: 64
+        height: 64
+        x:setting_screen_btn_bg.x + setting_screen_btn_bg.width+15
+        y:root.height-bookmark_btn_bg.height-15
+        source: "qrc:/res/bg_btn_normal.png"
 
+        Image {
+            id:bookmark_bt
+            width: 31
+            height: 31
+            source: "qrc:/res/ic_bookmark.png"
+            anchors.centerIn: bookmark_btn_bg
+        }
         MouseArea {
-            anchors.fill: bookmark_btn
+            anchors.fill: bookmark_btn_bg
             onClicked: { show_bookmark_page(); load_bookmark() }
         }
     }
@@ -292,5 +280,23 @@ Window {
         id: setting_screen_page
         //y:topbar.height
     }
+
+    Timer {
+        id:check_is_running
+        interval: 5
+        running: false
+        repeat: true
+        onTriggered: {
+            console.log("Check application is running")
+
+            // if not running app now
+            if(!app_manager.check_is_running())
+            {
+                list_screen.visible = true
+                check_is_running.running = false
+            }
+        }
+    }
+
 }
 

@@ -44,22 +44,55 @@ Item {
 
     id:bookmark_page
 
-    width: root.width * 0.85
-    height: root.height * 0.65
-    opacity: 0.87
-    anchors.horizontalCenter: parent.horizontalCenter
+    //width: root.width * 0.85
+    //height: root.height * 0.65
+    //anchors.horizontalCenter: parent.horizontalCenter
 
-    Rectangle {
+    width: 1024
+    height: 596
+    Image {
         id: bookmark_page_rec
         width: bookmark_page.width
         height: bookmark_page.height
-        radius: 20
-        color: "white"
+        source: "qrc:/res/bg_bookmark.png"
         anchors.horizontalCenter: parent.horizontalCenter
 
         Row {
-            spacing: bookmark_page.width * 0.04
-            anchors.centerIn: parent
+            y:145
+            width: 195
+            spacing: 7
+            anchors.horizontalCenter: bookmark_page_rec.horizontalCenter
+            Image {
+                id:bookmark_img
+                width: 33
+                height: 31
+                source: "qrc:/res/ic_bookmark.png"
+            }
+
+            Text {
+                id:boobmark_txt
+                width: 150
+                height: 31
+                text: "Bookmarks"
+                font.family: font_load.name
+                font.pointSize: 18
+                color: "white"
+            }
+        }
+
+        Rectangle {
+            id:bookmark_line
+            height: 2
+            width: 200
+            color: "#2fffffff"
+            y:188
+            anchors.horizontalCenter: bookmark_page_rec.horizontalCenter
+        }
+
+        Row {
+            spacing: bookmark_page.width * 0.03
+            y:245
+            anchors.horizontalCenter: parent.horizontalCenter
             Repeater {
                 /* Maximum bookmark count is 5 */
                 id:bookmark_items
@@ -82,7 +115,7 @@ Item {
             /* If exist bookmark */
             if( isSet[del_bookmark_index] == 1 )
             {
-                bookmark_items.itemAt(del_bookmark_index).icon_image = "file:///opt/res/add_bookmark.png"
+                bookmark_items.itemAt(del_bookmark_index).icon_image = "qrc:/res/ic_bookmark_add.png"
                 bookmark_items.itemAt(del_bookmark_index).bookmark_icon_name = "Add Icon"
                 set_manager.del_bookmark_name(del_bookmark_index);
 
@@ -117,33 +150,52 @@ Item {
     }
 
     Row{
-        spacing: 5
-        //anchors.horizontalCenter: parent.horizontalCenter
-        anchors.right: parent.right
+        spacing: 10
+        y:140
+        x:775
         // confirm button & Home Button
 
         Image {
-            id: delete_home_btn
-            width: bookmark_page.width * 0.05
-            height: bookmark_page.width * 0.05
-            source: "file://opt/res/home.png"
-            //text:"Home"
+            id: delete_home_btn_bg
+            width: 64
+            height: 64
+            source: "qrc:/res/bg_btn_normal.png"
+
+            Image {
+                id:delete_home_btn
+                width: 31
+                height: 31
+                source: "qrc:/res/ic_home.png"
+                anchors.centerIn: delete_home_btn_bg
+            }
+
             MouseArea {
-                anchors.fill: delete_home_btn
+                anchors.fill: delete_home_btn_bg
                 onClicked: {
                     bookmark.visible = false
                     list_screen.visible = true
+                    active_bar.visible = true
                 }
             }
         }
 
         Image {
-            id: delete_btn
-            width: bookmark_page.width * 0.05
-            height: bookmark_page.width * 0.05
-            source: "file://opt/res/delete.jpeg"
+            id: delete_btn_bg
+            width: 64
+            height: 64
+            source: "qrc:/res/bg_btn_normal.png"
+
+
+            Image {
+                id:delete_btn
+                width: 31
+                height: 31
+                source: "qrc:/res/ic_trash.png"
+                anchors.centerIn: delete_btn_bg
+            }
+
             MouseArea {
-                anchors.fill: delete_btn
+                anchors.fill: delete_btn_bg
                 onClicked: {
                     bookmark_delete_page.visible = true
                     list_screen.visible = false
@@ -152,5 +204,11 @@ Item {
             }
         }
     }
+
+    FontLoader {
+        id: font_load
+        source: "res/Arial_Black.ttf"
+    }
+
 }
 
