@@ -33,6 +33,7 @@ void Backlight_manager::change_backlight(int val)
     QByteArray backlight  = backlight_val_str.toLocal8Bit();
 
     QTextStream out(backlight_port);
+    /*
 
     // backlight off
     if(val)
@@ -42,6 +43,9 @@ void Backlight_manager::change_backlight(int val)
     else
         for(int i=1;i<12;i++)
             out << i;
+            */
+    out << backlight.data();
+
 
 
 

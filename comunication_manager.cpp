@@ -48,6 +48,7 @@ void Comunication_manager::slot_get_can_data(struct can_frame frame_rd, int recv
         int backlight_val = light_data / (MAX_LIGHT_DATA/MAX_BRIGHTNESS);
         int threshold     = (light_data < 1000);
 
+        /*
         if(tmp_thres == -1)
             tmp_thres = threshold;
         else
@@ -63,7 +64,12 @@ void Comunication_manager::slot_get_can_data(struct can_frame frame_rd, int recv
             backlight_manger.change_backlight(threshold);
             is_changed = 0;
         }
+        */
+        backlight_manger.change_backlight(backlight_val);
     }
+
+
+
 }
 
 

@@ -52,7 +52,6 @@
         <file>res/delete_app.png</file>
         <file>res/CSD_Sensing.png</file>
         <file>res/control_handle.png</file>
-        <file>res/btn_delete.png</file>
         <file>res/bg_wallpaper.png</file>
         <file>res/bg_control.png</file>
         <file>res/bg_control_bar_bg.png</file>
@@ -61,5 +60,7 @@
         <file>res/auto_britness_on.png</file>
         <file>res/auto_britness_off.png</file>
         <file>res/add_bookmark.png</file>
+        <file>res/btn_delete.png</file>
+        <file>res/ic_confirm.png</file>
     </qresource>
 </RCC>

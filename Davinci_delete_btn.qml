@@ -11,16 +11,16 @@ Item {
     }
 
     id: delete_app_form
-    width: root.width * 0.04
-    height: root.width * 0.04
+    width: 54
+    height: 55
 
     Row {
 
         Image {
 
             id: delete_app
-            width: root.width * 0.04
-            height: root.width * 0.04
+            width: delete_app_form.width
+            height: delete_app_form.height
             source: "qrc:/res/btn_delete.png"
 
             MouseArea {

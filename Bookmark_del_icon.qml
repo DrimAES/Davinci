@@ -5,10 +5,12 @@ import QtQuick.Controls 1.4
 Item {
     property int del_bookmark_id
     property var del_icon_image
+    property bool is_run:false
 
     id: bookmark_del_icon
-    width: 64
-    height: 65
+    width: 58
+    height: 59
+
 
     Column {
 
@@ -25,6 +27,27 @@ Item {
                     root.del_bookmark(del_bookmark_id)
                 }
             }
+        }
+
+        RotationAnimation {
+
+            id: bookmark_delete_btn_animation
+            target: bookmark_del_icon_btn
+            property: "rotation"
+
+            from: 3
+            to  : 357
+            duration: 150
+
+            direction: RotationAnimation.Counterclockwise
+            easing.type: Easing.InOutElastic
+            running: is_run
+
+            onStopped: {
+                if(is_run)
+                    bookmark_delete_btn_animation.running = true
+            }
+
         }
 
     }

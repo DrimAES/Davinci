@@ -10,17 +10,16 @@ Item {
 
     Rectangle {
         id: rec
-        width: bookmark_delete_page.width
-        height: bookmark_delete_page.height
-        radius: 20
-        opacity: 0.7
-        color: "white"
+        width: bookmark_delete_page.width-17
+        height: bookmark_delete_page.height-4
+        radius: 27
+        color: "#7fffffff"
         anchors.horizontalCenter: parent.horizontalCenter
 
         Row {
-            spacing: bookmark_delete_page.width * 0.04
-            anchors.centerIn: parent
-
+            x:75
+            y:135
+            spacing: 85
             Repeater {
                 id:bookmark_delete_items
                 model: 5
@@ -39,7 +38,8 @@ Item {
                     if( bookmark.isSet[i] == 1 )
                     {
                         console.log("[sykang] iSet[" + i + "] = 1")
-                        bookmark_delete_items.itemAt(i).del_icon_image = "file:/opt/res/delete1.jpeg"
+                        bookmark_delete_items.itemAt(i).del_icon_image = "qrc:/res/btn_delete.png"
+                        bookmark_delete_items.itemAt(i).is_run = true
                     }
                     else
                     {

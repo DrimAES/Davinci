@@ -248,7 +248,15 @@ Window {
                     background_set(1)
                     is_set_back_res=1
                 }
+
+                list_screen.visible = false
+                active_bar.visible = false
+                control_center.visible = false
+                bookmark_btn_bg.visible = false
+                setting_screen_btn_bg.visible = false
+
                 show_setting_page()
+
             }
         }
     }

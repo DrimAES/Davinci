@@ -120,6 +120,7 @@ Item {
                 set_manager.del_bookmark_name(del_bookmark_index);
 
                 isSet[del_bookmark_index] = 0
+                bookmark_appname_list[del_bookmark_index] = "NULL"
             }
             bookmark.visible = true
             list_screen.visible = false
