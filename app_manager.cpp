@@ -42,16 +42,20 @@ void App_manager::get_app_list()
         list[screen_cnt].cnt = remain_app_cnt;
 }
 
-void App_manager::start_app(QString app_name)
+void App_manager::start_app(QString app_name, int type_run)
 {
-     is_running = 1;
+     // is_running : 1 => run at main page
+     // is_running : 2 => run at bookmark page
+     is_running = type_run;
      /* For eglfs */
      QString program = "/opt/" + app_name + " -platform eglfs";
      QByteArray prog_name = program.toLocal8Bit();
 
      system(prog_name.data());
 
-     is_running = 0;
+     // is_running : 3 => end at main page
+     // is_running : 4 => end at bookmark page
+     is_running = type_run+2;
 
 
      /* For wayland */

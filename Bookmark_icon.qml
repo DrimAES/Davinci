@@ -24,8 +24,11 @@ Item {
         /* If added bookmark */
         else
         {
+            console.log("Start!!")
             /* run application */
-            app_manager.start_app(bookmark_icon_name)
+            bookmark.visible  = false
+            check_is_running.running = true
+            app_manager.start_app(bookmark_icon_name,2)
         }
     }
 

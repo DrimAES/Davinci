@@ -24,7 +24,7 @@ void Backlight_manager::init_backlight_port()
     }
 }
 
-/* Backlight value range : 1 ~ 7 */
+/* Backlight value range : 1 ~ 11 */
 void Backlight_manager::change_backlight(int val)
 {
     int backlight_value = val;
@@ -33,5 +33,17 @@ void Backlight_manager::change_backlight(int val)
     QByteArray backlight  = backlight_val_str.toLocal8Bit();
 
     QTextStream out(backlight_port);
-    out << backlight.data();
+
+    // backlight off
+    if(val)
+        for(int i=11;i<0;i--)
+            out << i;
+    // backlight on
+    else
+        for(int i=1;i<12;i++)
+            out << i;
+
+
+
+
 }

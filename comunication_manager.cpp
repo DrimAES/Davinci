@@ -35,6 +35,8 @@ void Comunication_manager::slot_get_can_data(struct can_frame frame_rd, int recv
     // frame[0] ~ frame[3] : can high_data [ ex.0xABCD -> 0xA:frame[0], 0xD:frame[3]
     // frame[4] ~ frame[7] : can low_data
     uint light_data;
+    static int is_changed = 0;
+    static int tmp_thres  = -1;
 
     canid_t can_id = frame_rd.can_id;
 
@@ -42,8 +44,25 @@ void Comunication_manager::slot_get_can_data(struct can_frame frame_rd, int recv
     {
         light_data = frame_rd.data[CAN_D_H_IDX] << 8 | frame_rd.data[CAN_D_L_IDX];
 
+        /* Backlight value range : 1 ~ 11 */
         int backlight_val = light_data / (MAX_LIGHT_DATA/MAX_BRIGHTNESS);
-        backlight_manger.change_backlight(backlight_val);
+        int threshold     = (light_data < 1000);
+
+        if(tmp_thres == -1)
+            tmp_thres = threshold;
+        else
+        {
+            if(tmp_thres != threshold)
+                is_changed = 1;
+
+            tmp_thres = threshold;
+        }
+
+        if(is_changed)
+        {
+            backlight_manger.change_backlight(threshold);
+            is_changed = 0;
+        }
     }
 }
 

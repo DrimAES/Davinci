@@ -31,7 +31,7 @@ public:
     int is_running=0;
 
     Q_INVOKABLE void get_app_list();
-    Q_INVOKABLE void start_app(QString app_name);
+    Q_INVOKABLE void start_app(QString app_name, int type_run);
     Q_INVOKABLE QString get_app_name(int screen_id, int icon_id);
     Q_INVOKABLE int get_app_cnt(int screen_id);
     Q_INVOKABLE int get_screen_cnt();

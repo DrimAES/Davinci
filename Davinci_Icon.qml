@@ -7,6 +7,8 @@ Item {
     property bool       active_timer:false
     property bool       isclicked:false
     property bool       delete_btn_visible:false
+    property bool       is_bookmark_run:false
+    property var        mouse_x:0
 
     signal add_bookmark(var app_name)
     signal delete_icon()
@@ -58,7 +60,7 @@ Item {
                 console.log(icon_name)
                 check_is_running.running = true;
                 list_screen.visible = false
-                app_manager.start_app(icon_name)
+                app_manager.start_app(icon_name,1)
             }
         }
 
@@ -104,7 +106,25 @@ Item {
 
                 anchors.fill: app_icon
                 onClicked: { click_application() }
-                onPressed: { start_timer() }
+                onPressed: {
+                    mouse_x = 0
+                    start_timer()
+                }
+
+                onMouseXChanged: {
+
+                    if((Math.abs(mouse_x-mouseX)>5) && mouse_x!=0)
+                    {
+                        if(app_delete_btn.visible != true)
+                        {
+                            isclicked = true
+                        }
+                    }
+
+                    // tmp mouse_x value first press position
+                    if(mouse_x == 0)
+                        mouse_x = mouseX
+                }
             }
         }
 

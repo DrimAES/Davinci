@@ -287,13 +287,27 @@ Window {
         running: false
         repeat: true
         onTriggered: {
+
             console.log("Check application is running")
+            var run_flag = app_manager.check_is_running()
 
             // if not running app now
-            if(!app_manager.check_is_running())
+            if(run_flag>2)
             {
-                list_screen.visible = true
-                check_is_running.running = false
+                // run at main page
+                if(run_flag === 3)
+                {
+                    list_screen.visible = true
+                    check_is_running.running = false
+
+                }
+
+                // run at bookmark
+                else if(run_flag === 4)
+                {
+                    bookmark.visible  = true
+                    check_is_running.running = false
+                }
             }
         }
     }
