@@ -52,10 +52,6 @@ void QtSocketCan::slot_read_socketcan(int can_sock)
     int recv_bytes = 0;
     struct timeval timeout = {0, 0};
 
-
-
-    qDebug() <<  "[QtSocketCan] Get Can data ";
-
     fd_set readSet;
     FD_ZERO(&readSet);
     FD_SET(can_sock, &readSet);

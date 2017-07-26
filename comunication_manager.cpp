@@ -65,6 +65,13 @@ void Comunication_manager::slot_get_can_data(struct can_frame frame_rd, int recv
             is_changed = 0;
         }
         */
+
+
+        if(backlight_val == 0)
+            backlight_val = 1;
+        else if(backlight_val >11)
+            backlight_val = 11;
+
         backlight_manger.change_backlight(backlight_val);
     }
 
