@@ -28,7 +28,10 @@ Item {
             /* run application */
             bookmark.visible  = false
             check_is_running.running = true
+            fake_sig_timer.running = false
+            console.log("false fake sig timer bookmark")
             app_manager.start_app(bookmark_icon_name,2)
+
         }
     }
 

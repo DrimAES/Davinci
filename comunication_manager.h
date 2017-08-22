@@ -24,11 +24,14 @@ class Comunication_manager : public QObject
 public:
     explicit Comunication_manager(QObject *parent = 0);
     Q_INVOKABLE void set_auto_brightness(bool flag);
+    Q_INVOKABLE void set_is_control_backlight(int flag);
+    Q_INVOKABLE int get_is_control_backlight();
     bool auto_brightness_flag;
 
     Backlight_manager backlight_manger;
     QtSocketCan *qsock_can;
     QSocketNotifier *notifier;
+    int is_control_backlight=0;
 
 signals:
 

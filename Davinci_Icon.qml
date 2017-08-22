@@ -58,8 +58,13 @@ Item {
                 isclicked = true
                 /* bookmark mode */
                 console.log(icon_name)
-                check_is_running.running = true;
+                check_is_running.running = true
+                fake_sig_timer.running = false
+                console.log("false fake sig timer main")
                 list_screen.visible = false
+
+                if(comunication_manager.get_is_control_backlight)
+                    comunication_manager.set_is_control_backlight(0)
                 app_manager.start_app(icon_name,1)
             }
         }

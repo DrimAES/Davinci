@@ -3,9 +3,9 @@
 
 App_manager::App_manager(QObject *parent) : QObject(parent)
 {
-    get_app_list();
+    system("echo 1 > /sys/class/leds/wake/brightness");
 
-    //connect(this,SIGNAL(finished_app()),m_parent, SLOT(active_app()));
+    get_app_list();
 }
 
 void App_manager::get_app_list()
@@ -124,6 +124,13 @@ void App_manager::refresh_dir()
 int App_manager::check_is_running()
 {
     return is_running;
+}
+
+void App_manager::send_fake_signal()
+{
+    system("echo 0 > /sys/class/leds/wake/brightness");
+    QThread::msleep(350);
+    system("echo 1 > /sys/class/leds/wake/brightness");
 }
 
 

@@ -306,7 +306,10 @@ Window {
                 if(run_flag === 3)
                 {
                     list_screen.visible = true
+                    fake_sig_timer.running = true
+                    console.log("start fake sig timer main")
                     check_is_running.running = false
+                    comunication_manager.set_is_control_backlight(1)
 
                 }
 
@@ -315,10 +318,20 @@ Window {
                 {
                     bookmark.visible  = true
                     check_is_running.running = false
+                    fake_sig_timer.running = true
+                    console.log("start fake sig timer bookmark")
+                    comunication_manager.set_is_control_backlight(1)
                 }
             }
         }
     }
 
+    Timer {
+        id:fake_sig_timer
+        interval: 300000; running: true; repeat: true
+        onTriggered: {
+            app_manager.send_fake_signal()
+        }
+    }
 }
 

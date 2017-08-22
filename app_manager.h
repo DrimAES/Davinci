@@ -7,6 +7,8 @@
 #include <QDebug>
 #include <QProcess>
 
+#include <QThread>
+
 #define MAX_SCREEN_CNT          5
 #define MAX_APP_CNT_PER_SCREEN  8
 
@@ -30,6 +32,8 @@ public:
     int screen_cnt=0;
     int is_running=0;
 
+
+
     Q_INVOKABLE void get_app_list();
     Q_INVOKABLE void start_app(QString app_name, int type_run);
     Q_INVOKABLE QString get_app_name(int screen_id, int icon_id);
@@ -39,6 +43,7 @@ public:
     Q_INVOKABLE void delete_app(QString name);
     Q_INVOKABLE void refresh_dir();
     Q_INVOKABLE int check_is_running();
+    Q_INVOKABLE void send_fake_signal();
 
 
     void init_list();

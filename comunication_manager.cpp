@@ -11,13 +11,27 @@ void Comunication_manager::set_auto_brightness(bool flag)
     {
         qDebug()<<"[Comunication_manager] Start auto brightness";
         connect(notifier, SIGNAL(activated(int)), qsock_can, SLOT(slot_read_socketcan(int)));
+        is_control_backlight = 1;
     }
 
     else
     {
         qDebug()<<"[Comunication_manager] Stop auto brightness";
         disconnect(notifier, SIGNAL(activated(int)), qsock_can, SLOT(slot_read_socketcan(int)));
+        is_control_backlight = 0;
     }
+}
+
+void Comunication_manager::set_is_control_backlight(int flag)
+{
+    is_control_backlight = flag;
+    qDebug() << "Set is control backlight";
+    qDebug() << flag;
+}
+
+int Comunication_manager::get_is_control_backlight()
+{
+    return is_control_backlight;
 }
 
 void Comunication_manager::init_socketcan()
@@ -72,11 +86,9 @@ void Comunication_manager::slot_get_can_data(struct can_frame frame_rd, int recv
         else if(backlight_val >11)
             backlight_val = 11;
 
-        backlight_manger.change_backlight(backlight_val);
+        if(is_control_backlight)
+            backlight_manger.change_backlight(backlight_val);
     }
-
-
-
 }
 
 
